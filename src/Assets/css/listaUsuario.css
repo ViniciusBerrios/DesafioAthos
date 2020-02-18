@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dadosUsuario{
+    height: 500px;
+    width: 50%;
+    background: white;
+    border-radius: 20px;
+    margin:0 auto;
+    top: 30px;
+    position: relative;
+    border:10px solid #a61b22; 
+}
+
+.dadosUsuario p{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 40px;
+    position: absolute;
+    color: black;
+    left: 39%;
+    top: 20px;
+}
+
+#tabela{
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    width: 100%;
+    color: black;
+    font-size: 15px;
+    top: 100px;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  #tabela td,
+  #tabela th {
+    border: 1px solid #a61b22;
+    padding: 10px;
+  }
+  
+  #tabela tr:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+  }

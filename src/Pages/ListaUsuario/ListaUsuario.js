@@ -1,50 +1,60 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Topo from '../../components/Topo/topo'
+import api from '../../services/api'
+import '../../Assets/css/listaUsuario.css'
 
-export default class ListaAdm extends Component{
-    constructor(){
+export default class ListaAdm extends Component {
+    constructor() {
         super();
 
-        this.state={
-            listaUsuarios:[]
+        this.state = {
+            listaUsuarios: []
         };
     }
 
-    buscarUsuarios(){
-        fetch('https://api.backendless.com/5B47E127-88D3-2562-FF22-589138DA6B00/AB3D4F84-00B8-4787-FF90-0527E5132500/data/usuario',{
+    buscarUsuarios() {
+        fetch(api + 'usuario', {
             headers: {
-                'Authorization' : 'Bearer'
+                'Content-Type': 'application/json'
             }
-            })
+        })
             .then(resposta => resposta.json())
-            .then(data => this.setState({listaUsuarios : data}))
+            .then(data => this.setState({ listaUsuarios: data }))
             .catch(erro => console.log(erro))
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.buscarUsuarios();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                
-                <div>
-                    <table>
-                        <tbody>
-                            {
-                                this.state.listaUsuarios.map(function(usuario){
-                                    return(
-                                        <tr key={usuario.id}>
-                                            <td>{usuario.email}</td>
-                                            <td>{usuario.nome}</td>
-                                            <td>{usuario.condominio.nomeCondominio}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
+
+                <Topo />
+
+                <section className="ListaUsuarios">
+                    <div className="dadosUsuario">
+
+                        <p>Usuários</p>
+
+                        <table id="tabela">
+                            <tbody>
+                                {
+                                    this.state.listaUsuarios.map((usuario, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{usuario.email}</td>
+                                                <td>{usuario.nome}</td>
+                                                <td>{usuario.condominio.nomeCondominio}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
 
             </div>
         )

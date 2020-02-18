@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.camposEmails{
+    height: 500px;
+    width: 50%;
+    background: white;
+    border-radius: 20px;
+    margin:0 auto;
+    top: 30px;
+    position: relative;
+    border:10px solid #a61b22; 
+}
+
+.camposEmails p{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 40px;
+    position: absolute;
+    color: black;
+    left: 28%;
+    top: 20px;
+}
+
+.formEmail{
+    top: 100px;
+    position: relative;
+    left: 25%;
+    font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tituloDe {
+    margin-right: 73px;
+}
+
+.inputDe{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 200px;
+    height: 30px;
+    margin-top: 15px;
+    border: solid #a61b22;
+}
+
+.tituloPara {
+    margin-right: 58px;
+}
+
+.inputPara{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 200px;
+    height: 30px;
+    margin-top: 30px;
+    border: solid #a61b22;
+}
+
+.tituloAssunto {
+    margin-right: 30px;
+}
+
+.inputAssunto{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 30px;
+    margin-top: 30px;
+    border: solid #a61b22;
+}
+
+.tituloConteudo {
+    margin-right: 17px;
+}
+
+.inputConteudo{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 30px;
+    margin-top: 30px;
+    border: solid #a61b22;
+}
+
+.botao_enviar button{
+    background: green;
+    height: 40px;
+    width: 150px;
+    color: white;
+    border-radius: 10px;
+    font-size: 1em;
+    margin-top: 40px;
+    left: 14%;
+    position: absolute;
+}

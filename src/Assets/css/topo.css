@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.banner{
+    display: flex;
+}
+
+.logo img{
+    height: 80px;
+    width: 230px;
+    left: 70px;
+    position: relative;
+}
+
+.menu{
+    list-style:none; 
+    border:2px solid #a61b22; 
+    float:left;
+    position: relative;
+    left: 950px;
+    top: 20px;
+}
+
+.menu li{
+    position:relative; 
+    float:left; 
+}
+
+.menu li a{
+    color:black; 
+    text-decoration:none; 
+    padding:7px 15px;
+    display:block;}
+ 
+.menu li a:hover{
+    background:#a61b22; 
+    color:#fff; 
+}
+
+.menu li  ul{
+    position:absolute; 
+    top:25px; 
+    left:0;
+    background-color:white ; 
+    display:none;
+}   
+
+    	
+.menu li:hover ul, .menu li.over ul{
+    display:block;
+}
+
+.menu li ul li{
+    border:1px solid #c0c0c0; 
+    display:block; 
+    width:150px;
+}

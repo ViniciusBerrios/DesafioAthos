@@ -1,113 +1,124 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Topo from '../../components/Topo/topo'
+import api from '../../services/api'
+import '../../Assets/css/cadastroEmail.css';
 
-export default class CadastroEmail extends Component{
-    constructor(){
+export default class CadastroEmail extends Component {
+    constructor() {
         super();
 
-        this.state={
-            id:'',
-            de:'',
-            para:'',
-            assunto:'',
-            conteudo:''
+        this.state = {
+            de: '',
+            para: '',
+            assunto: '',
+            conteudo: '',
+            listaUsuarios: []
         }
-        this.atualizaEstadoDeForm = this.atualizaEstadoDe.bind(this);
-        this.atualizaEstadoParaForm = this.atualizaEstadoPara.bind(this);
-        this.atualizaEstadoAssuntoForm = this.atualizaEstadoAssunto.bind(this);
-        this.atualizaEstadoConteudoForm = this.atualizaEstadoConteudo.bind(this);
     }
 
-    atualizaEstadoDe(event){
-        this.setState({ de : event.target.value})
-    }
-
-    atualizaEstadoPara(event){
-        this.setState({ para : event.target.value})
-    }
-
-    atualizaEstadoAssunto(event){
-        this.setState({ assunto : event.target.value})
-    }
-
-    atualizaEstadoConteudo(event){
-        this.setState({ conteudo : event.target.value})
-    }
-
-    cadastroEmail(event){
-        event.preventDefault();
-
-        fetch('https://api.backendless.com/5B47E127-88D3-2562-FF22-589138DA6B00/AB3D4F84-00B8-4787-FF90-0527E5132500/data/email'+ this.state.id,{
-        method:'PUT',
-        body: JSON.stringify({
-            id: this.state.id,
-            de:this.state.de,
-            para:this.state.para,
-            assunto:this.state.assunto,
-            conteudo:this.state.conteudo
-        }),
-        headers:{
-            'Authorization': 'Bearer ',
-            'Content-Type' : 'application/json'
-        }
-    })
-    .then(response => response)
-        .then(data => {
-            this.setState({ id: '' })
-            this.props.history.push('/listaEmail');
-            console.log(data);
-        })
-        .catch(erro => console.log(erro))
-    }
-
-    buscarPorId(event, data) {
-        event.preventDefault();
-
-        fetch('https://api.backendless.com/5B47E127-88D3-2562-FF22-589138DA6B00/AB3D4F84-00B8-4787-FF90-0527E5132500/data/email' + event.target.getAttribute('id'), {
+    buscarUsuarios() {
+        fetch(api + 'usuario', {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => response.json())
-            .then(data => this.setState({
-                id: data.id,
-                de:data.de,
-                para:data.para,
-                assunto:data.assunto,
-                conteudo:data.conteudo
-            }))
+            .then(resposta => resposta.json())
+            .then(data => this.setState({ listaUsuarios: data }))
             .catch(erro => console.log(erro))
     }
 
-    render(){
-        return(
+    componentDidMount() {
+        this.buscarUsuarios();
+    }
+
+    cadastroEmail(event) {
+        event.preventDefault();
+        const { de, para, assunto, conteudo } = this.state;
+
+        fetch(api + 'email', {
+            method: 'PUT',
+            body: JSON.stringify({
+                de: de,
+                para: para,
+                assunto: assunto,
+                conteudo: conteudo
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(resposta => resposta)
+            .then(data => {
+
+                this.props.history.push('/listaEmail');
+                console.log(data);
+            })
+            .catch(erro => console.log(erro))
+    }
+
+    render() {
+        const { de, para, assunto, conteudo } = this.state
+        return (
             <div>
-                <div>
-                    <form onSubmit={this.cadastroEmail.bind(this)}>
-                        <div>
-                            <label>De</label>
-                            <input type="text" value={this.state.de} onChange={this.atualizaEstadoDeForm}/>
-                        </div>
 
-                        <div>
-                            <label>Para</label>
-                            <input type="text" value={this.state.para} onChange={this.atualizaEstadoParaForm}/>
-                        </div>
+                <Topo />
 
-                        <div>
-                            <label>Assunto</label>
-                            <input type="text" value={this.state.assunto} onChange={this.atualizaEstadoAssuntoForm}/>
-                        </div>
+                <section className="cadastroEmail">
+                    <div className="camposEmails">
 
-                        <div>
-                            <label>Conteúdo</label>
-                            <input type="text" value={this.state.conteudo} onChange={this.atualizaEstadoConteudoForm}/>
-                        </div>
+                        <p>Cadastro de Email</p>
+                        <form className="formEmail" onSubmit={this.cadastroEmail.bind(this)}>
 
-                        <div className="botao_enviar">
-                            <button type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
+                            <div>
+
+                                <label className="tituloDe">De</label>
+
+                                <select className="inputDe" value={de} onChange={e => this.setState({ de: e.target.value })}>
+
+                                    <option value="">Selecione </option>
+                                    {
+                                        this.state.listaUsuarios.map((usuario, index) => {
+                                            return (
+                                                <option key={index} value={usuario.email}>{usuario.email}</option>
+                                            )
+                                        })
+                                    }
+
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="tituloPara">Para</label>
+                                <select className="inputPara" value={para} onChange={e => this.setState({ para: e.target.value })}>
+
+                                    <option value="">Selecione </option>
+                                    {
+                                        this.state.listaUsuarios.map((usuario, index) => {
+                                            return (
+                                                <option key={index} value={usuario.email}>{usuario.email}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="tituloAssunto">Assunto</label>
+                                <input className="inputAssunto" type="text" value={assunto} onChange={e => this.setState({ assunto: e.target.value })} />
+                            </div>
+
+                            <div>
+                                <label className="tituloConteudo">Conteúdo</label>
+                                <input className="inputConteudo" type="text" value={conteudo} onChange={e => this.setState({ conteudo: e.target.value })} />
+                            </div>
+
+                            <div className="botao_enviar">
+                                <button type="submit">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
             </div>
         )
     }

@@ -7,6 +7,7 @@ import ListaCondominio from './Pages/ListaCondominio/ListaCondominio';
 import ListaEmail from './Pages/ListaEmail/ListaEmail';
 import ListaUsuario from './Pages/ListaUsuario/ListaUsuario';
 import NaoEncontrada from './Pages/NaoEncontrada/NaoEncontrada';
+import Home from './Pages/Home/Home';
 import{Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
@@ -14,7 +15,8 @@ const rotas = (
     <Router>
         <div>
             <Switch>
-                <Route exact path="/" component={ListaAdm}/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/listaadministrador" component={ListaAdm}/>
                 <Route path="/listacondominio" component={ListaCondominio}/>
                 <Route path="/listaemail" component={ListaEmail}/>
                 <Route path="/listausuario" component={ListaUsuario}/>
